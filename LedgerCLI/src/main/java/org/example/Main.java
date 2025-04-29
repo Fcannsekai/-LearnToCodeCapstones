@@ -13,12 +13,12 @@ public class Main {
 // create setters and getters X
 //o The home screen should give the user the following options. The X
 //application should continue to run until the user chooses to exit. X
-//§ D) Add Deposit - prompt user for the deposit information and
+//§ D) Add Deposit - prompt user for the deposit information and X
 //save it to the csv file
 //§ P) Make Payment (Debit) - prompt user for the debit
 //information and save it to the csv file
 //§ L) Ledger - display the ledger screen
-//§ X) Exit - exit the application
+//§ X) Exit - exit the application X
 
 
 //• Ledger - All entries should show the newest entries first
