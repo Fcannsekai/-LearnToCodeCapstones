@@ -48,6 +48,14 @@ public class Ledger {
             amount *= -1;
         }
 
+    Transactions tx = new Transactions(LocalTime.now(), LocalDate.now(), description, vendor, amount);
+    appendTransactionToFile(tx);
+        System.out.println("Transaction saved.");
+}
+
+    private void appendTransactionToFile(Transactions tx) {
+            
+    }
 
     public void listOfTransactions(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
