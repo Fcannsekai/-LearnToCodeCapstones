@@ -26,13 +26,26 @@ public class Ledger {
             String filePath = scanner.nextLine().trim().toUpperCase(); // for case sensitivity purposes
 
             switch (filePath) {  // switch case instead of else if to improve readability and shorten code
-                case "D" -> System.out.println("Test");
-                case "P" -> System.out.println("marq");
-                case "L" -> System.out.println("fred");
+                case "D" -> addTransaction(true);
+                case "P" -> addTransaction(false);
+                case "L" -> ledgerMenu();
                 case "X" -> System.exit(0);
                 default -> System.out.println("Invalid input.");
             }
             homeScreen();
+        }
+
+    public void addTransaction(boolean isDeposit) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter description: ");
+        String description = scanner.nextLine();
+        System.out.print("Enter vendor: ");
+        String vendor = scanner.nextLine();
+        System.out.print("Enter amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
+
+        if (!isDeposit) {
+            amount *= -1;
         }
 
 

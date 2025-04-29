@@ -11,8 +11,8 @@ public class Main {
 
 // create constructor X
 // create setters and getters X
-//o The home screen should give the user the following options. The
-//application should continue to run until the user chooses to exit.
+//o The home screen should give the user the following options. The X
+//application should continue to run until the user chooses to exit. X
 //§ D) Add Deposit - prompt user for the deposit information and
 //save it to the csv file
 //§ P) Make Payment (Debit) - prompt user for the debit
