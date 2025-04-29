@@ -1,10 +1,9 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,28 +11,29 @@ import java.util.regex.Pattern;
 
 public class Ledger {
 
-        private List<Transactions> transactionsList = new ArrayList<>();
+    private List<Transactions> transactionsList = new ArrayList<>();
 
-        public void homeScreen() { // homescreen display
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Welcome, what would you like to do today?\n" +
-                    "D) Add Deposit\n" +
-                    "P) Make Payment\n" +
-                    "L) Ledger\n" +
-                    "X) Exit\n" +
-                    ">");
+    public void homeScreen() { // homescreen display
+        Scanner scanner = new Scanner(System.in);
+        listOfTransactions();
+        System.out.print("Welcome, what would you like to do today?\n" +
+                "D) Add Deposit\n" +
+                "P) Make Payment\n" +
+                "L) Ledger\n" +
+                "X) Exit\n" +
+                ">");
 
-            String filePath = scanner.nextLine().trim().toUpperCase(); // for case sensitivity purposes
+        String filePath = scanner.nextLine().trim().toUpperCase(); // for case sensitivity purposes
 
-            switch (filePath) {  // switch case instead of else if to improve readability and shorten code
-                case "D" -> addTransaction(true);
-                case "P" -> addTransaction(false);
-                case "L" -> ledgerMenu();
-                case "X" -> System.exit(0);
-                default -> System.out.println("Invalid input.");
-            }
-            homeScreen();
+        switch (filePath) {  // switch case instead of else if to improve readability and shorten code
+            case "D" -> addTransaction(true);
+            case "P" -> addTransaction(false);
+            case "L" -> ledgerMenu();
+            case "X" -> System.exit(0);
+            default -> System.out.println("Invalid input.");
         }
+        homeScreen();
+    }
 
     public void addTransaction(boolean isDeposit) {
         Scanner scanner = new Scanner(System.in);
@@ -48,19 +48,41 @@ public class Ledger {
             amount *= -1;
         }
 
-    Transactions tx = new Transactions(LocalTime.now(), LocalDate.now(), description, vendor, amount);
-    appendTransactionToFile(tx);
+        Transactions tx = new Transactions(LocalTime.now(), LocalDate.now(), description, vendor, amount);
+        appendTransactionToFile(tx);
         System.out.println("Transaction saved.");
-}
-
-    private void appendTransactionToFile(Transactions tx) {
-            
     }
 
-    public void listOfTransactions(String fileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+    private void appendTransactionToFile(Transactions tx) {
+
+        try {
+            // create a FileWriter
+            FileWriter fileWriter = new FileWriter("Transactions.csv", true);
+            // create a BufferedWriter
+            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+            // write to the file
+            String text;
+            // for (int i = 1; i <= 10; i++) { old code
+            DateTimeFormatter timeWithAmPm = DateTimeFormatter.ofPattern("hh:mm:ss"); //changed time format
+            LocalTime formattedTime = LocalTime.parse(tx.getTime().format(timeWithAmPm));
+            text = String.format(tx.getDate() + "|" + formattedTime + "|" + tx.getDescription() + "|" + tx.getVendor() + "|" + tx.getFaceValue());
+            bufWriter.write(text);
+            // close the writer
+            bufWriter.close();
+        } catch (IOException e) {
+            System.out.println("ERROR:  An unexpected error occurred");
+            e.getStackTrace();
+
+        }
+    }
+
+
+    public void listOfTransactions() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Transactions.csv"))) {
             String line;
             Pattern pattern = Pattern.compile("\\|");
+
+            reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 String[] tokens = pattern.split(line);
@@ -86,5 +108,13 @@ public class Ledger {
         for (Transactions tx : transactionsList) {
             System.out.println(tx);
         }
+
     }
+
+    public void ledgerMenu() {
+        displayTransactions();
+    }
+
 }
+
+
