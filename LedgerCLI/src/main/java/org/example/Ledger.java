@@ -63,10 +63,10 @@ public class Ledger {
             // write to the file
             String text;
             // for (int i = 1; i <= 10; i++) { old code
-            DateTimeFormatter timeWithAmPm = DateTimeFormatter.ofPattern("hh:mm:ss"); //changed time format
+            DateTimeFormatter timeWithAmPm = DateTimeFormatter.ofPattern("HH:mm:ss"); //changed time format
             LocalTime formattedTime = LocalTime.parse(tx.getTime().format(timeWithAmPm));
             text = String.format(tx.getDate() + "|" + formattedTime + "|" + tx.getDescription() + "|" + tx.getVendor() + "|" + tx.getFaceValue());
-            bufWriter.write(text);
+            bufWriter.write(text + "\n");
             // close the writer
             bufWriter.close();
         } catch (IOException e) {
@@ -78,6 +78,7 @@ public class Ledger {
 
 
     public void listOfTransactions() {
+        transactionsList.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader("Transactions.csv"))) {
             String line;
             Pattern pattern = Pattern.compile("\\|");
@@ -112,8 +113,29 @@ public class Ledger {
     }
 
     public void ledgerMenu() {
-        displayTransactions();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ledger Menu\n" +
+        "A) All\n" +
+        "D) Deposits\n" +
+        "P) Payments\n" +
+        "R) Reports\n" +
+        "H) Home\n" +
+        ">");
+
+        String choice = scanner.nextLine().trim().toUpperCase();
+
+        switch (choice) {
+            case "A" -> displayTransactions(tx -> true);
+            case "D" -> displayTransactions(tx -> tx.getFaceValue() > 0);
+            case "P" -> displayTransactions(tx -> tx.getFaceValue() < 0);
+            case "R" -> reportsMenu();
+            case "H" -> homeScreen();
+            default -> System.out.println("Invalid input.");
+        }
+
+        ledgerMenu(); // loop again
     }
+
 
 }
 
