@@ -11,6 +11,13 @@ public class Transactions {
     String vendor;
     double faceValue;
 
+    public void displayTransaction () {
+
+        System.out.println(time + "|" + date + "|" + description + "|" + vendor + "|" + faceValue);
+
+    }
+
+
     public Transactions(LocalTime time, LocalDate date, String description, String vendor, double faceValue) {
         this.time = time;
         this.date = date;
@@ -58,4 +65,5 @@ public class Transactions {
     public void setFaceValue(double faceValue) {
         this.faceValue = faceValue;
     }
+
 }

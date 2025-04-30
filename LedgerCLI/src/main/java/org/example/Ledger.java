@@ -45,7 +45,7 @@ public class Ledger {
         double amount = Double.parseDouble(scanner.nextLine());
 
         if (!isDeposit) {
-            amount *= -1;
+            amount = -amount;
         }
 
         Transactions tx = new Transactions(LocalTime.now(), LocalDate.now(), description, vendor, amount);
@@ -61,11 +61,12 @@ public class Ledger {
             // create a BufferedWriter
             BufferedWriter bufWriter = new BufferedWriter(fileWriter);
             // write to the file
-            String text;
+            String text = "";
             // for (int i = 1; i <= 10; i++) { old code
             DateTimeFormatter timeWithAmPm = DateTimeFormatter.ofPattern("HH:mm:ss"); //changed time format
             LocalTime formattedTime = LocalTime.parse(tx.getTime().format(timeWithAmPm));
             text = String.format(tx.getDate() + "|" + formattedTime + "|" + tx.getDescription() + "|" + tx.getVendor() + "|" + tx.getFaceValue());
+
             bufWriter.write(text + "\n");
             // close the writer
             bufWriter.close();
@@ -93,7 +94,7 @@ public class Ledger {
                     LocalTime time = LocalTime.parse(tokens[1].trim());
                     String description = tokens[2].trim();
                     String vendor = tokens[3].trim();
-                    double amount = Double.parseDouble(tokens[4].trim());
+                    double amount = Double.parseDouble(tokens[4]);
 
                     Transactions tx = new Transactions(time, date, description, vendor, amount);
                     transactionsList.add(tx);
@@ -107,9 +108,27 @@ public class Ledger {
 
     public void displayTransactions() {
         for (Transactions tx : transactionsList) {
-            System.out.println(tx);
+            tx.displayTransaction();
         }
 
+    }
+
+
+    public void displayDeposits() {
+        for (Transactions tx : transactionsList) {
+            if (tx.getFaceValue() > 0) {
+                tx.displayTransaction();
+            }
+        }
+    }
+
+
+    public void displayPayments() {
+        for (Transactions tx : transactionsList) {
+            if (tx.getFaceValue() < 0) {
+                tx.displayTransaction();
+            }
+        }
     }
 
     public void ledgerMenu() {
@@ -125,16 +144,70 @@ public class Ledger {
         String choice = scanner.nextLine().trim().toUpperCase();
 
         switch (choice) {
-            case "A" -> displayTransactions(tx -> true);
-            case "D" -> displayTransactions(tx -> tx.getFaceValue() > 0);
-            case "P" -> displayTransactions(tx -> tx.getFaceValue() < 0);
-            case "R" -> reportsMenu();
+            case "A" -> displayTransactions();
+            case "D" -> displayDeposits();
+            case "P" -> displayPayments();
+            //case "R" -> reportsMenu();
             case "H" -> homeScreen();
             default -> System.out.println("Invalid input.");
         }
 
-        ledgerMenu(); // loop again
+        ledgerMenu(); // Recursion loop
     }
+
+     /*public void reportsMenu() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Welcome to the reports menu\n" +
+            "1) Month To Date\n" +
+            "2) Previous Month\n" +
+            "3) Year To Date\n" +
+            "4) Previous Year\n" +
+            "5) Search by Vendor\n" +
+            "0) Back\n" +
+            ">");
+
+        String choice = scanner.nextLine().trim();
+
+        LocalDate now = LocalDate.now();
+
+        switch (choice) {
+            case "1" -> {
+                LocalDate firstDayOfMonth = now.withDayOfMonth(1);
+                displayTransactions(tx -> tx.getDate().isBefore(firstDayOfMonth));
+            }
+            case "2" -> {
+                LocalDate firstDayOfLastMonth = now.minusMonths(1).withDayOfMonth(1);
+                LocalDate lastDayOfLastMonth = now.withDayOfMonth(1).minusDays(1);
+                displayTransactions(tx ->
+                        tx.getDate().isBefore(firstDayOfLastMonth) ||
+                                tx.getDate().isAfter(lastDayOfLastMonth));
+            }
+            case "3" -> {
+                LocalDate firstDayOfYear = now.withDayOfYear(1);
+                displayTransactions(tx -> tx.getDate().isBefore(firstDayOfYear));
+            }
+            case "4" -> {
+                LocalDate firstDayLastYear = now.minusYears(1).withDayOfYear(1);
+                LocalDate lastDayLastYear = now.withDayOfYear(1).minusDays(1);
+                displayTransactions(tx ->
+                        !(!tx.getDate().isBefore(firstDayLastYear) ||
+                                tx.getDate().isAfter(lastDayLastYear)));
+            }
+            case "5" -> {
+                System.out.print("Enter vendor name to search: ");
+                String vendorSearch = scanner.nextLine().trim().toLowerCase();
+                displayTransactions(tx -> tx.getVendor().toLowerCase().contains(vendorSearch));
+            }
+            case "0" -> {
+                ledgerMenu();
+                return;
+            }
+            default -> System.out.println("Invalid input.");
+        }
+
+        reportsMenu(); // Recursion loop
+    }/*
+
 
 
 }
