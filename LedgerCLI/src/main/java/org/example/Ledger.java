@@ -147,7 +147,7 @@ public class Ledger {
             case "A" -> displayTransactions();
             case "D" -> displayDeposits();
             case "P" -> displayPayments();
-            //case "R" -> reportsMenu();
+            case "R" -> reportsMenu();
             case "H" -> homeScreen();
             default -> System.out.println("Invalid input.");
         }
@@ -155,7 +155,19 @@ public class Ledger {
         ledgerMenu(); // Recursion loop
     }
 
-     /*public void reportsMenu() {
+    public void monthToDate() {
+        LocalDate firstDayOfMonth = LocalDate.now().withDayOfMonth(1);
+        for (Transactions tx : transactionsList) {
+        if (tx.getDate().isBefore(firstDayOfMonth)){
+
+            tx.displayTransaction();
+        }
+
+        }
+
+    }
+
+      public void reportsMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Welcome to the reports menu\n" +
             "1) Month To Date\n" +
@@ -171,10 +183,8 @@ public class Ledger {
         LocalDate now = LocalDate.now();
 
         switch (choice) {
-            case "1" -> {
-                LocalDate firstDayOfMonth = now.withDayOfMonth(1);
-                displayTransactions(tx -> tx.getDate().isBefore(firstDayOfMonth));
-            }
+            case "1" -> monthToDate();
+
             case "2" -> {
                 LocalDate firstDayOfLastMonth = now.minusMonths(1).withDayOfMonth(1);
                 LocalDate lastDayOfLastMonth = now.withDayOfMonth(1).minusDays(1);
@@ -206,7 +216,7 @@ public class Ledger {
         }
 
         reportsMenu(); // Recursion loop
-    }/*
+    }
 
 
 
