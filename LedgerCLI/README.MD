@@ -17,7 +17,7 @@ This project is designed as a lightweight financial record-keeping tool.
 
 ## Screenshots
 
-> PLACEHOLDER
+
 
 ### Home Menu
 
