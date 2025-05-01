@@ -32,12 +32,8 @@ The application allows users to search past transactions by vendor name through 
 This feature reads all transactions from the `Transactions.csv` file and lets the user enter a search term to filter matching vendors.
 
 Example Output
-```text
-Enter vendor name to search: walmart
-12:35:00|2025-04-26|Groceries|Walmart| -75.00
 
-Code Snippet
-
+```java
 public void searchByVendor() {
     Scanner scanner = new Scanner(System.in);
     System.out.print("Enter vendor name to search: ");
@@ -48,7 +44,8 @@ public void searchByVendor() {
             tx.displayTransaction();
         }
     }
-}```
+}
+```
 
 -------->
 
