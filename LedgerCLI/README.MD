@@ -35,14 +35,33 @@ Here’s one of the more interesting design choices in the app: **using Java’s
 
 >PLACEHOLDER
 
-## How to Run
+### How to Run the Application 
 
-Make sure you have Java installed (`javac` and `java` available).
+#### ✅ Prerequisites
+- IntelliJ IDEA (Community edition is completely fine)
+- Java JDK 17 or later installed
 
-```bash
-javac org/example/*.java
-java org.example.Main
-```
+-------->
+
+#### Steps to Run:
+
+1. Clone or Download the Repository
+   - **Option A:**  
+     If using Git:
+     ```bash
+     git clone https://github.com/your-username/your-repo-name.git
+     ```
+   - **Option B:**  
+     Download the `.zip` and extract it manually.
+
+2. Open the Project in IntelliJ
+  
+3. Run the Application
+   - In the **Project pane**, open `Main.java` (located in `src/main/java/org/example/`).
+   - Right-click anywhere in the `Main` class and choose **Run 'Main.main()'**.
+
+4. The application will start in the IntelliJ terminal. Use the menu options to interact with the ledger.
+
 
 Make sure `transactions.csv` exists in your project root.
 
