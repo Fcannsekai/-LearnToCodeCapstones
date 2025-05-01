@@ -21,21 +21,34 @@ This project is designed as a lightweight financial record-keeping tool.
 
 <img src="./Assets/Ledgercli2.gif">
 
-### Home Menu
-
-
-### Ledger View (All Transactions)
-
-
-### Report Menu
+<img src="./Assets/LedgerCLI3.gif">
 
 -------->
 
 ## Code Highlight
 
-Here’s one of the more interesting design choices in the app: **using Java’s functional programming features** to filter ledger entries based on various criteria.
+The application allows users to search past transactions by vendor name through the **Reports Menu**.
 
->PLACEHOLDER
+This feature reads all transactions from the `Transactions.csv` file and lets the user enter a search term to filter matching vendors.
+
+Example Output:
+```text
+Enter vendor name to search: walmart
+12:35:00|2025-04-26|Groceries|Walmart| -75.00
+
+Code Snippet:
+
+public void searchByVendor() {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter vendor name to search: ");
+    String vendorSearch = scanner.nextLine().trim().toLowerCase();
+
+    for (Transactions tx : transactionsList) {
+        if (tx.getVendor().toLowerCase().contains(vendorSearch)) {
+            tx.displayTransaction();
+        }
+    }
+}
 
 ### How to Run the Application 
 
