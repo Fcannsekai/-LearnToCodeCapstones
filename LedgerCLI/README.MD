@@ -17,7 +17,7 @@ This project is designed as a lightweight financial record-keeping tool.
 
 ## Screenshots
 
-> PLACEHOLDER
+![Demo of App](assets/Recordingledgerclicapstone1-ezgif.com)
 
 ### Home Menu
 
