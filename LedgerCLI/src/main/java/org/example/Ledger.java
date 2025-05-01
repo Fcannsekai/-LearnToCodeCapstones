@@ -155,59 +155,25 @@ public class Ledger {
         ledgerMenu(); // Recursion loop
     }
 
-    public void monthToDate() {
-        LocalDate firstDayOfMonth = LocalDate.now().withDayOfMonth(1);
-        for (Transactions tx : transactionsList) {
-        if (tx.getDate().isBefore(firstDayOfMonth)){
-
-            tx.displayTransaction();
-        }
-
-        }
-
-    }
-
-      public void reportsMenu() {
+    public void reportsMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Welcome to the reports menu\n" +
-            "1) Month To Date\n" +
-            "2) Previous Month\n" +
-            "3) Year To Date\n" +
-            "4) Previous Year\n" +
-            "5) Search by Vendor\n" +
-            "0) Back\n" +
-            ">");
+                "1) Month To Date\n" +
+                "2) Previous Month\n" +
+                "3) Year To Date\n" +
+                "4) Previous Year\n" +
+                "5) Search by Vendor\n" +
+                "0) Back\n" +
+                ">");
 
         String choice = scanner.nextLine().trim();
 
-        LocalDate now = LocalDate.now();
-
         switch (choice) {
             case "1" -> monthToDate();
-
-            case "2" -> {
-                LocalDate firstDayOfLastMonth = now.minusMonths(1).withDayOfMonth(1);
-                LocalDate lastDayOfLastMonth = now.withDayOfMonth(1).minusDays(1);
-                displayTransactions(tx ->
-                        tx.getDate().isBefore(firstDayOfLastMonth) ||
-                                tx.getDate().isAfter(lastDayOfLastMonth));
-            }
-            case "3" -> {
-                LocalDate firstDayOfYear = now.withDayOfYear(1);
-                displayTransactions(tx -> tx.getDate().isBefore(firstDayOfYear));
-            }
-            case "4" -> {
-                LocalDate firstDayLastYear = now.minusYears(1).withDayOfYear(1);
-                LocalDate lastDayLastYear = now.withDayOfYear(1).minusDays(1);
-                displayTransactions(tx ->
-                        !(!tx.getDate().isBefore(firstDayLastYear) ||
-                                tx.getDate().isAfter(lastDayLastYear)));
-            }
-            case "5" -> {
-                System.out.print("Enter vendor name to search: ");
-                String vendorSearch = scanner.nextLine().trim().toLowerCase();
-                displayTransactions(tx -> tx.getVendor().toLowerCase().contains(vendorSearch));
-            }
+            case "2" -> previousMonth();
+            case "3" -> yearToDate();
+            case "4" -> previousYear();
+            case "5" -> searchByVendor();
             case "0" -> {
                 ledgerMenu();
                 return;
@@ -215,11 +181,62 @@ public class Ledger {
             default -> System.out.println("Invalid input.");
         }
 
-        reportsMenu(); // Recursion loop
+        reportsMenu();
+    }
+    //----------------------------------------------------->  switch to individual methods for each case for clarity.
+    public void monthToDate() {
+        LocalDate firstDay = LocalDate.now().withDayOfMonth(1);
+        for (Transactions tx : transactionsList) {
+            if (!tx.getDate().isBefore(firstDay)) {
+                tx.displayTransaction();
+            }
+        }
     }
 
+    public void previousMonth() {
+        LocalDate now = LocalDate.now();
+        LocalDate start = now.minusMonths(1).withDayOfMonth(1);
+        LocalDate end = now.withDayOfMonth(1).minusDays(1);
 
+        for (Transactions tx : transactionsList) {
+            if (!tx.getDate().isBefore(start) && !tx.getDate().isAfter(end)) {
+                tx.displayTransaction();
+            }
+        }
+    }
 
+    public void yearToDate() {
+        LocalDate start = LocalDate.now().withDayOfYear(1);
+        for (Transactions tx : transactionsList) {
+            if (!tx.getDate().isBefore(start)) {
+                tx.displayTransaction();
+            }
+        }
+    }
+
+    public void previousYear() {
+        LocalDate now = LocalDate.now();
+        LocalDate start = now.minusYears(1).withDayOfYear(1);
+        LocalDate end = now.withDayOfYear(1).minusDays(1);
+
+        for (Transactions tx : transactionsList) {
+            if (!tx.getDate().isBefore(start) && !tx.getDate().isAfter(end)) {
+                tx.displayTransaction();
+            }
+        }
+    }
+
+    public void searchByVendor() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vendor name to search: ");  // Easiest part of the project LOL
+        String vendorSearch = scanner.nextLine().trim().toLowerCase();
+
+        for (Transactions tx : transactionsList) {
+            if (tx.getVendor().toLowerCase().contains(vendorSearch)) {
+                tx.displayTransaction();
+            }
+        }
+    }
 }
 
 
