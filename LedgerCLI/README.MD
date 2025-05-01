@@ -17,7 +17,7 @@ This project is designed as a lightweight financial record-keeping tool.
 
 ## Screenshots
 
-
+<img src="./Assets/Ledger1.gif.gif">
 
 ### Home Menu
 
