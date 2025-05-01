@@ -12,3 +12,7 @@ date|time|description|vendor|amount
 2025-04-30|14:40:57|apple|applestore|23.0
 2025-04-30|14:41:26|pear|pearstore|-23.0
 2025-04-30|23:18:13|haylee|hayleestore|-9000.0
+2025-05-01|13:00:24|pens|sourcepens|5000.0
+2025-05-01|13:00:46|pencils|sourcepencils|-300.0
+2025-05-01|13:35:23|pens|penultimate|300.0
+2025-05-01|13:35:41|pencils|pencilultimate|-200.0
