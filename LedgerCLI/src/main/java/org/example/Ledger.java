@@ -27,13 +27,14 @@ public class Ledger {
 
         switch (filePath) {  // switch case instead of else if to improve readability and shorten code
             case "D" -> addTransaction(true);
-            case "P" -> addTransaction(false);
+            case "P" -> addTransaction(false); // Lambda syntax used to clean up code
             case "L" -> ledgerMenu();
             case "X" -> System.exit(0);
             default -> System.out.println("Invalid input.");
         }
         homeScreen();
     }
+
 
     public void addTransaction(boolean isDeposit) {
         Scanner scanner = new Scanner(System.in);
