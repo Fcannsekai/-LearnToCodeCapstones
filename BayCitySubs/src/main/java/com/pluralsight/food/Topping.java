@@ -50,5 +50,5 @@ public class Topping {
     }
 }
 
-//This class is a functional topping class that should be able to interact with my sandwich class as well as the
-//topping selection class which then will connect to a CLI in which a customer can choose what they want.
+/*This class is a functional topping class that should be able to interact with my sandwich class as well as the
+topping selection class which then will connect to a CLI in which a customer can choose what they want.*/
