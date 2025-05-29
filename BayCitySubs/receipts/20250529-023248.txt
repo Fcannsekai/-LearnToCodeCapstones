@@ -1,0 +1,18 @@
+X===> Bay City Subs Receipt <===X
+Order Time: 20250529-023248
+
+4" white sandwich
+Toasted
+Toppings:
+  - steak
+  - american
+  - provolone
+  - lettuce
+  - tomato
+Total: $8.00
+small soda water ($2.0)
+classic lays chips ($3.0)
+
+Total: $13.0
+
+Thank you for your order!

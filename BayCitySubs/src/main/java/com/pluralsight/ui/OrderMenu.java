@@ -6,6 +6,7 @@ import com.pluralsight.food.Sandwich;
 import com.pluralsight.food.Drink;
 import com.pluralsight.food.Chip;
 import com.pluralsight.food.ToppingSelectionHelper;
+import com.pluralsight.ui.ReceiptWriter;
 
 public class OrderMenu {
     private final Scanner scanner = new Scanner(System.in);
@@ -13,7 +14,7 @@ public class OrderMenu {
     public void display(Order order) {
         boolean running = true;
         while (running) {
-            System.out.println("\n=== Order Menu ===");
+            System.out.println("\nX===> Order Menu <===X");
             System.out.println("1) Add Sandwich");
             System.out.println("2) Add Drink");
             System.out.println("3) Add Chips");
@@ -31,16 +32,16 @@ public class OrderMenu {
                     running = false;
                 }
                 case "0" -> {
-                    System.out.println("Order canceled. Returning to home.");
+                    System.out.println("Order canceled");
                     running = false;
                 }
-                default -> System.out.println("Invalid choice. Please try again.");
+                default -> System.out.println("Invalid choice. Please choose from the menu");
             }
         }
     }
 
     private void addSandwich(Order order) {
-        System.out.println("\n-- Build Your Sandwich --");
+        System.out.println("\n--> Build Your Sandwich <--");
         System.out.println("Choose size: 1) 4\"  2) 8\"  3) 12\"");
         System.out.print("> ");
         String size = switch (scanner.nextLine().trim()) {
@@ -91,7 +92,7 @@ public class OrderMenu {
         String flavor = scanner.nextLine().trim();
         Drink drink = new Drink(size, flavor);
         order.addDrink(drink);
-        System.out.println("✅ Drink added.");
+        System.out.println(" Drink added.");
     }
 
     private void addChips(Order order) {
@@ -100,12 +101,12 @@ public class OrderMenu {
         String flavor = scanner.nextLine().trim();
         Chip chip = new Chip(flavor);
         order.addChips(chip);
-        System.out.println("✅ Chips added.");
+        System.out.println(" Chips added.");
     }
 
     private void checkout(Order order) {
         double total = 0;
-        System.out.println("\n🧾 Order Summary:");
+        System.out.println("\nOrder Summary:");
         for (Sandwich s : order.getSandwiches()) {
             System.out.println(s);
             total += s.getPrice();
@@ -120,10 +121,11 @@ public class OrderMenu {
         }
 
         double roundedTotal = Math.round(total * 100) / 100.0;
-        System.out.println("💵 Total: $" + roundedTotal);
+        System.out.println("Total: $" + roundedTotal);
 
         System.out.print("Confirm order? (yes/no): ");
         if (scanner.nextLine().trim().equalsIgnoreCase("yes")) {
+            ReceiptWriter.saveReceipt(order);
             System.out.println(" Order confirmed! Thank you.");
         } else {
             System.out.println(" Order not confirmed.");

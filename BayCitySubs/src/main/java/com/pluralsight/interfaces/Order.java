@@ -36,7 +36,6 @@ public class Order {
         return chips;
     }
 
-    /** @return total cost of everything in the order */
     public double getTotalPrice() {
         double total = 0.0;
         for (Sandwich s : sandwiches) total += s.getPrice();

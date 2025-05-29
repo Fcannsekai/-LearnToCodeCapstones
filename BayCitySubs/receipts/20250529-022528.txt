@@ -1,0 +1,18 @@
+X===> Bay City Subs Receipt <===X
+Order Time: 20250529-022528
+
+12" garlic knot sandwich
+Toasted
+Toppings:
+  - bacon
+  - steak
+  - swiss
+  - peppers
+  - onion
+Total: $16.75
+small Hi-C ($2.0)
+BBQ chips ($3.0)
+
+Total: $21.75
+
+Thank you for your order!
