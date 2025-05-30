@@ -23,4 +23,6 @@ Each order generates a neatly formatted, timestamped receipt.
 
 ---
 
+## Animation Preview
 
+<img src="./Assets/asciianimationbaycitysubs.gif">
