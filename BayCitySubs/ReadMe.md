@@ -26,3 +26,17 @@ Each order generates a neatly formatted, timestamped receipt.
 ## Animation Preview
 
 <img src="./Assets/asciianimationbaycitysubs.gif">
+
+## Screenshots
+
+Sandwich order screen
+
+<img src="./Assets/sandwhich code.png">
+
+Receipt 
+
+<img src="./Assets/Recepit code.png">
+
+## Diagram
+
+<img src="./Assets/BayCitySubDia.png">
