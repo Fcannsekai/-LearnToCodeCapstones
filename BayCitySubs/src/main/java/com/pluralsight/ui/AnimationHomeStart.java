@@ -59,8 +59,7 @@ public class AnimationHomeStart {
             typePrint(BANNER, 3);
             pause(800);
 
-            // Print the scene just once
-            for (String line : SCENE) {
+            for (String line : SCENE) {   // makes sure this only plays once
                 System.out.println(line);
             }
             pause(500);
