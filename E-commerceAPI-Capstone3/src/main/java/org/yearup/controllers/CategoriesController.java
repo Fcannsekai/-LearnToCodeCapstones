@@ -50,7 +50,7 @@ public class CategoriesController
         return categoryDao.create(category);
     }
 
-    @PutMapping("{id}")  
+    @PutMapping("{id}")
     @PreAuthorize("hasRole('ADMIN')")  // Only Admins can update categories
     public void updateCategory(@PathVariable int id, @RequestBody Category category)
     {

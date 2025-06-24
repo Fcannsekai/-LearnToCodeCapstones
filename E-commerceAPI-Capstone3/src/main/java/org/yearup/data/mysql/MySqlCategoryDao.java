@@ -18,7 +18,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public List<Category> getAllCategories()
+    public List<Category> getAll()
     {
         List<Category> categories = new ArrayList<>();
         String sql = "SELECT * FROM categories;";
@@ -94,7 +94,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public void update(int categoryId, Category category)
+    public void update(Category category)
     {
         String sql = "UPDATE categories SET name = ?, description = ? WHERE category_id = ?;";
 
@@ -103,7 +103,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         {
             statement.setString(1, category.getName());
             statement.setString(2, category.getDescription());
-            statement.setInt(3, categoryId);
+            statement.setInt(3, category.getCategoryId());
 
             statement.executeUpdate();
         }
@@ -116,8 +116,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     @Override
     public void delete(int categoryId)
     {
-        // Let op: Dit faalt als er producten zijn met deze category_id vanwege foreign key constraints.
-        // Eerst moeten de gerelateerde producten worden verwijderd of de category_id worden aangepast.
         String sql = "DELETE FROM categories WHERE category_id = ?;";
 
         try (Connection connection = getConnection();
