@@ -27,7 +27,7 @@ public class CategoriesController
         this.productDao = productDao;
     }
 
-    @GetMapping  // GET http://localhost:8080/categories
+    @GetMapping  // GET
     public List<Category> getAll()
     {
         return categoryDao.getAll(); //temp errors going to be gone once i set up the DAO classes
