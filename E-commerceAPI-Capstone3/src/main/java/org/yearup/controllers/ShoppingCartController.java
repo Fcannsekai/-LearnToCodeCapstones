@@ -50,7 +50,7 @@ public class ShoppingCartController
     }
 
     @PostMapping("/products/{productId}")
-    public void addProduct(@PathVariable int productId, Principal principal)
+    public ShoppingCart addProduct(@PathVariable int productId, Principal principal)
     {
         try
         {
@@ -59,6 +59,8 @@ public class ShoppingCartController
             int userId = user.getId();
 
             shoppingCartDao.addProduct(userId, productId);
+            return shoppingCartDao.getByUserId(user.getId());
+
         }
         catch (Exception e)
         {
