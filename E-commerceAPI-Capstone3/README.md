@@ -43,20 +43,38 @@ That's it! 🎉 Your backend should now be running locally.
 
 Below are two screenshots from my postman test scrpits 
 
-<img src="./Assets/">
+<img src="./Assets/Postman1.png">
 
-
-
-
-
-
+<img src="./Assets/Postman2.png">
 
 ---
 
 ## Interesting Code Snippet
 
-This method inside the `` class 
+This method inside the `ShoppingCartController` class, This method handles adding a product to the logged-in user's shopping cart. It uses the product's ID from the URL and the authenticated user's information to ensure the correct cart is updated. After adding the product, the updated cart is returned to keep the front-end in sync.
 
 ```java
 
+ @PostMapping("/products/{productId}")
+    public ShoppingCart addProduct(@PathVariable int productId, Principal principal)
+    {
+        try
+        {
+            String userName = principal.getName();
+            User user = userDao.getByUserName(userName);
+            int userId = user.getId();
+
+            shoppingCartDao.addProduct(userId, productId);
+            return shoppingCartDao.getByUserId(user.getId());
+
+        }
+        catch (Exception e)
+        {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to add product to cart.");
+        }
+    }
+
+
 ```
+
+
