@@ -77,4 +77,58 @@ This method inside the `ShoppingCartController` class, This method handles addin
 
 ```
 
+# EasyShop Frontend
+
+## Running the Project
+
+This project is not deployed. To run the frontend locally:
+
+1. Clone or download this repository  
+2. Open the project folder in your code editor  
+3. Open `index.html` directly in your browser or use a simple live server extension  
+4. Ensure the EasyShop backend is running at `http://localhost:8080`  
+5. Begin exploring the site  
+
+---
+
+## Features
+
+- Modern, responsive user interface  
+- Product catalog with images, descriptions, and pricing  
+- Product filtering by category, price range, and color  
+- Add, view, and remove items from the shopping cart  
+- Real-time cart item count updates  
+- One-click clear cart functionality  
+- Secure login with JWT authentication  
+- View and update user profile information  
+- Checkout functionality that creates orders through the backend  
+- Fully integrated with the EasyShop Spring Boot API  
+
+---
+
+## Connected API Endpoints
+
+| Endpoint               | Method | Description                |
+|------------------------|--------|----------------------------|
+| `/products`            | GET    | Fetch all products         |
+| `/cart`                | GET    | Retrieve user's cart       |
+| `/cart/products/{id}`  | POST   | Add item to cart           |
+| `/cart`                | DELETE | Clear entire cart          |
+| `/profile`             | GET    | View user profile          |
+| `/profile`             | PUT    | Update user profile        |
+| `/login`               | POST   | Authenticate and receive token |
+| `/register`            | POST   | Register a new user        |
+
+---
+
+## Screenshots
+
+### Home Page  
+<img src="./Assets/">
+
+### Cart Page  
+
+
+### Profile Page  
+
 
