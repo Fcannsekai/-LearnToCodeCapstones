@@ -41,9 +41,11 @@ That's it! 🎉 Your backend should now be running locally.
 
 ## Screenshots
 
-Below are two screenshots from Postman:
+Below are two screenshots from my postman test scrpits 
 
-### Required Endpoints Test Run
+<img src="./Assets/">
+
+
 
 
 
