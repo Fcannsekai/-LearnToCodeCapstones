@@ -124,11 +124,11 @@ This project is not deployed. To run the frontend locally:
 ## Screenshots
 
 ### Home Page  
-<img src="./Assets/">
+<img src="./Assets/HomePage.png">
 
 ### Cart Page  
-
+<img src="./Assets/ShoppingCart.png">
 
 ### Profile Page  
-
+<img src="./Assets/Profile.png">
 
